@@ -45,15 +45,22 @@
     </div>
 
     <div class="contact-grid">
-      <form class="contact-form" id="contact-form">
-        <label>Your name<input id="c-name" required autocomplete="name"></label>
-        <label>Email<input id="c-email" type="email" required autocomplete="email"></label>
-        <label>Message<textarea id="c-msg" rows="6" placeholder="What are we building? A role, a freelance build, or an SEO fix-up."></textarea></label>
+      <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none;"><label>Leave this empty <input name="bot-field"></label></p>
+        <label>Your name<input name="name" id="c-name" required autocomplete="name"></label>
+        <label>Email<input name="email" id="c-email" type="email" required autocomplete="email"></label>
+        <label>Message<textarea name="message" id="c-msg" rows="6" required placeholder="What are we building? A role, a freelance build, or an SEO fix-up."></textarea></label>
         <button type="submit" class="btn btn--clay" style="justify-self:start;">Send message &rarr;</button>
-        <p class="note">Opens your mail app with the message pre-filled.</p>
+        <p class="note">Goes straight to Mafy's inbox. Replies land within a day.</p>
       </form>
 
       <div class="contact-side">
+        <div class="contact-card contact-card--book">
+          <div class="contact-card__k">Book a call</div>
+          <p style="margin:0;font-size:14px;">Grab a 30-minute slot that suits your time zone. It lands on my calendar right away.</p>
+          <a id="book-link" class="btn btn--clay" style="justify-self:start;" href="BOOKING_URL_HERE" target="_blank" rel="noopener">Pick a time &rarr;</a>
+        </div>
         <div class="contact-card contact-card--direct">
           <div class="contact-card__k">Direct line</div>
           <a class="contact-card__email" href="mailto:hidalgo.mafy@gmail.com">hidalgo.mafy@gmail.com</a>
@@ -75,21 +82,5 @@
   </main>
 </div>
 <script src="assets/site.js"></script>
-<script>
-(function () {
-  var form = document.getElementById('contact-form');
-  if (!form) return;
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var name = document.getElementById('c-name').value;
-    var email = document.getElementById('c-email').value;
-    var msg = document.getElementById('c-msg').value;
-    var body = msg + '\n\n\u2014 ' + name + ' (' + email + ')';
-    window.location.href = 'mailto:hidalgo.mafy@gmail.com?subject=' +
-      encodeURIComponent('Portfolio inquiry from ' + name) +
-      '&body=' + encodeURIComponent(body);
-  });
-})();
-</script>
 </body>
 </html>

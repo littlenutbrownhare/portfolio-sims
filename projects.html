@@ -87,7 +87,7 @@
      - live only     -> just the Live button (websites, projects 6–8)
      - neither       -> no buttons, screenshot + text only (restricted/branded, 9–11)
      img: path to a hard-coded screenshot in assets/projects/. Leave '' to show a placeholder frame. */
-    var projects = [
+  var projects = [
     { title: 'RollbackHQ', kind: 'Frontend', year: 2026, desc: 'An undo button for AI. Every proposed data change is snapshotted, validated against a threshold, routed to a human, and reversible in one click.', stack: 'React · Redux Toolkit · React Router · Cypress · Netlify', live: 'https://rollbackhq.netlify.app', repo: gl, img: 'assets/projects/rollback.jpg' },
     { title: 'RollbackHQ API', kind: 'Backend', year: 2026, desc: 'Clients propose, the server decides. bcrypt + JWT auth, atomic approvals with a 409 guard, and an AI Trust Report built on aggregation pipelines.', stack: 'Node · Express · MongoDB Atlas · JWT · Render', live: 'https://rollbackhq.netlify.app', repo: gl, img: 'assets/projects/rollbackend.png' },
     { title: 'Logix WMS', kind: 'Web app', year: 2026, desc: 'Pharmaceutical warehouse management: inventory, purchasing, deliveries and AI-assisted insights in one place. Role-based access, FEFO expiry tracking, real-time stock via Socket.io.', stack: 'React · Node · MongoDB · Socket.io', live: 'https://logix-wms-frontend.onrender.com', repo: gh + '/Logix-WMS', img: 'assets/projects/logix.jpg' },

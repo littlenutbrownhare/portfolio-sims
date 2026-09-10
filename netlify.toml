@@ -1,0 +1,9 @@
+# Netlify build settings for a plain static site (no build step).
+[build]
+  publish = "."
+
+# Long-cache the static assets (images, css, js), which are safe to cache hard.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
