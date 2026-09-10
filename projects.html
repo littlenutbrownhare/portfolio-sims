@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Mafy Hidalgo</title>
+<meta name="description" content="Built, tested, shipped. RollbackHQ, Logix WMS, Keyword Compass and more from Mafy Hidalgo.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px 28px; }
+  .proj { background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 24px; overflow: hidden; display: grid; transition: transform .2s ease, box-shadow .2s ease; box-shadow: 6px 6px 0 var(--sh, #d6694a); }
+  .proj:hover { transform: translateY(-8px); box-shadow: 10px 14px 0 var(--sh, #d6694a); }
+  .proj__shot { position: relative; aspect-ratio: 16/10; background: #e9dcbb; border-bottom: 2px solid #4a2e22; overflow: hidden; }
+  .proj__shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+  .proj:hover .proj__shot img { transform: scale(1.04); }
+  .proj__ph { position: absolute; inset: 0; display: grid; place-items: center; color: #4a2e2288; font-size: 13px; font-weight: 600; text-align: center; padding: 12px; }
+  .proj__body { padding: 20px 22px 24px; display: grid; gap: 10px; }
+  .proj__kind { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #d6694a; }
+  .proj__body h2 { margin: 0; font-family: 'Young Serif', serif; font-size: 22px; font-weight: 400; }
+  .proj__body p { margin: 0; font-size: 14px; }
+  .proj__stack { font-size: 12px; font-weight: 600; color: #4a2e22aa; }
+  .proj__links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+  .proj__live { font-size: 13px; font-weight: 700; background: #f2c14e; color: #4a2e22; padding: 8px 16px; border: 2px solid #4a2e22; border-radius: 999px; }
+  .proj__live:hover { background: #4a2e22; color: #fbf6e9; }
+  .proj__repo { font-size: 13px; font-weight: 700; color: #4a2e22; padding: 8px 16px; border: 2px solid #4a2e22; border-radius: 999px; }
+  .proj__repo:hover { background: #8fcfb8; }
+  .proj__view { font-family: inherit; font-size: 13px; font-weight: 700; color: #4a2e22; background: #8fcfb8; padding: 8px 16px; border: 2px solid #4a2e22; border-radius: 999px; cursor: pointer; }
+  .proj__view:hover { background: #4a2e22; color: #fbf6e9; }
+  .proj__shot--zoom { cursor: zoom-in; }
+  .proj__zoom { position: absolute; top: 12px; right: 12px; z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: #4a2e22; color: #fbf6e9; display: grid; place-items: center; font-size: 16px; opacity: 0; transition: opacity .15s; pointer-events: none; }
+  .proj__shot--zoom:hover .proj__zoom, .proj__shot--zoom:focus-visible .proj__zoom { opacity: 1; }
+
+  /* Lightbox for restricted-app screenshots */
+  .lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 32px; background: rgba(74,46,34,.82); backdrop-filter: blur(3px); cursor: zoom-out; }
+  .lightbox.is-open { display: flex; }
+  .lightbox__inner { position: relative; max-width: 1040px; width: 100%; max-height: 92vh; overflow: auto; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.4); padding: 16px; display: grid; gap: 14px; cursor: default; }
+  .lightbox__img { max-width: 100%; max-height: 66vh; object-fit: contain; border: 1px solid #d9cdb0; border-radius: 6px; margin: 0 auto; display: block; }
+  .lightbox__meta { padding: 0 6px 6px; }
+  .lightbox__kind { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #d6694a; margin-bottom: 4px; }
+  .lightbox__meta h3 { font-family: 'Young Serif', serif; font-size: 24px; font-weight: 400; margin: 0 0 8px; }
+  .lightbox__meta p { margin: 0 0 12px; font-size: 15px; }
+  .lightbox__list { margin: 0 0 12px; padding-left: 20px; display: grid; gap: 5px; }
+  .lightbox__list li { font-size: 14px; }
+  .lightbox__list li::marker { color: #d6694a; }
+  .lightbox__stack { font-size: 12px; font-weight: 600; color: #4a2e22aa; }
+  .lightbox__close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border-radius: 50%; background: #d6694a; color: #fbf6e9; border: 2px solid #4a2e22; font-size: 20px; font-weight: 700; cursor: pointer; display: grid; place-items: center; box-shadow: 3px 3px 0 #4a2e22; }
+  .lightbox__close:hover { background: #4a2e22; }
+</style>
+</head>
+<body>
+<div class="page-bg">
+  <nav data-nav="projects"></nav>
+  <main class="main">
+    <div class="page-head">
+      <div class="eyebrow">Projects</div>
+      <h1>Built, tested, <span class="accent">shipped</span></h1>
+      <p>A mix of things I've built solo, on teams, and for clients. Some live, some I can only show as screenshots.</p>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <footer class="footer"><span>&copy; <span data-year></span> Mafy Hidalgo · Manila</span><a href="case-studies.html">Next: SEO Results &rarr;</a></footer>
+  </main>
+
+  <div class="lightbox" id="proj-lightbox" aria-hidden="true">
+    <div class="lightbox__inner" role="dialog" aria-modal="true" aria-label="Project details">
+      <button class="lightbox__close" aria-label="Close">&times;</button>
+      <img class="lightbox__img" id="proj-lightbox-img" src="" alt="">
+      <div class="lightbox__meta">
+        <div class="lightbox__kind" id="proj-lightbox-kind"></div>
+        <h3 id="proj-lightbox-title"></h3>
+        <p id="proj-lightbox-desc"></p>
+        <ul class="lightbox__list" id="proj-lightbox-list"></ul>
+        <div class="lightbox__stack" id="proj-lightbox-stack"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  var gl = 'https://gitlab.com/ma-faye-hidalgo';
+  var gh = 'https://github.com/littlenutbrownhare';
+
+  /* Each project lists only what it has.
+     - live + repo  -> both buttons
+     - live only     -> just the Live button (websites, projects 6–8)
+     - neither       -> no buttons, screenshot + text only (restricted/branded, 9–11)
+     img: path to a hard-coded screenshot in assets/projects/. Leave '' to show a placeholder frame. */
+    var projects = [
+    { title: 'RollbackHQ', kind: 'Frontend', year: 2026, desc: 'An undo button for AI. Every proposed data change is snapshotted, validated against a threshold, routed to a human, and reversible in one click.', stack: 'React · Redux Toolkit · React Router · Cypress · Netlify', live: 'https://rollbackhq.netlify.app', repo: gl, img: 'assets/projects/rollback.jpg' },
+    { title: 'RollbackHQ API', kind: 'Backend', year: 2026, desc: 'Clients propose, the server decides. bcrypt + JWT auth, atomic approvals with a 409 guard, and an AI Trust Report built on aggregation pipelines.', stack: 'Node · Express · MongoDB Atlas · JWT · Render', live: 'https://rollbackhq.netlify.app', repo: gl, img: 'assets/projects/rollbackend.png' },
+    { title: 'Logix WMS', kind: 'Web app', year: 2026, desc: 'Pharmaceutical warehouse management: inventory, purchasing, deliveries and AI-assisted insights in one place. Role-based access, FEFO expiry tracking, real-time stock via Socket.io.', stack: 'React · Node · MongoDB · Socket.io', live: 'https://logix-wms-frontend.onrender.com', repo: gh + '/Logix-WMS', img: 'assets/projects/logix.jpg' },
+    { title: 'Keyword Compass', kind: 'AI tool', year: 2026, desc: 'Seed keyword in, four intent clusters out, each with a topical fit score and a content angle. Classified by Money, Brand, Compound and tail length.', stack: 'Vanilla JavaScript · Google Gemini API', live: 'https://keywordcompass.netlify.app', repo: gl, img: 'assets/projects/compass.jpg' },
+    { title: 'Tech Store Manager', kind: 'Console app', year: 2026, desc: 'A terminal shop: browse, filter, search, cart and checkout with a 12% VAT receipt. readline wrapped in a Promise; bad input fails politely.', stack: 'Node.js · readline · async/await', repo: gl, img: 'assets/projects/techstore.png' },
+
+    /* 6–8 · client websites (live link only, no public repo) */
+    { title: 'Triviva Health', kind: 'Website', year: '2026', desc: 'Designed and developed a modern, trust-driven website for Triviva Health, focused on communicating their mission of making quality healthcare and affordable medicines accessible to Filipino families. The website highlights their pharmaceutical heritage, product offerings, nationwide reach, and commitment to quality and affordability.', stack: 'Payload CMS · React', live: 'https://www.trivivahealth.com/', img: 'assets/projects/triviva.png' },
+    { title: 'Herbenna', kind: 'Website', year: '2026', desc: 'Herbenna’s challenge was turning a product-focused wellness brand into a credible and recognizable digital presence. I created a website that simplifies complex information around herbal supplements, highlights the brand’s quality and FDA-registered products, and uses its history and mission to give customers greater confidence in choosing Herbenna for their everyday wellness needs.', stack: 'React · React Router · Tailwind CSS', live: 'https://herbenna.com', img: 'assets/projects/herbenna.png' },
+    { title: 'Trevenodd', kind: 'Website', year: '2025', desc: 'Trevenodd needed a digital presence that could clearly communicate its long history, diverse healthcare products, and evolution from traditional remedies to modern pharmaceutical solutions. I designed and developed a storytelling-focused website that organizes decades of milestones, products, and brand achievements into a clear and engaging experience, helping build credibility, communicate their mission, and strengthen their connection with Filipino consumers..', stack: 'Wordpress · GoHighLevel · MySQL', live: 'https://trevenodd.com', img: 'assets/projects/trevenodd.png' },
+
+
+    /* 9–11 · restricted / branded apps (screenshot only, click to zoom for full details).
+       For these, the popup shows the richer fields: role, detail, and highlights. */
+    { title: 'Leave Management System', kind: 'Client app', year: '2026',
+      desc: 'he application brings employees, managers, HR, executives, and system administrators into one structured workflow, making leave requests easier to submit, review, approve, track, and manage at scale',
+      role: 'Full stack developer',
+      detail: 'The organization was relying on a combination of chat messages, paper forms, and spreadsheets to manage employee leave. This created several operational challenges: requests were difficult to track, approvals could easily be overlooked, managers lacked a reliable view of their assigned employees, and HR had no centralized source of truth for leave activity.',
+      highlights: ['I designed a role-based web application that turns the entire leave process into a clear, centralized workflow. Employees can log in, submit requests, and monitor their status, while managers receive a dedicated dashboard showing only the employees and requests within their responsibility.', 'The experience was structured around a clear hierarchy: Employee → Manager / Department → HR / Executive → System Administrator. This hierarchy ensures that every user sees the information and actions relevant to their role while keeping sensitive employee and organizational data appropriately scoped.', 'A major challenge was balancing a simple employee experience with complex administrative requirements. While employees only need a straightforward way to request and track leave, administrators need to manage organizational structures, employee assignments, permissions, configurations, and system activity. To solve this, I separated the product into role-specific experiences rather than exposing every function to every user. Each dashboard and workflow was designed around the users responsibilities, reducing unnecessary information and making important actions easier to find. The platform also needed to support multiple companies and organizational structures without creating confusion. Employee-to-manager relationships, department assignments, and access permissions were therefore treated as part of the system architecture rather than being handled manually outside the application.', 'The result is a structured leave management system that replaces disconnected communication channels with a single source of truth. By combining centralized workflows, role-based permissions, organizational hierarchy, and dedicated administrative tools, the platform reduces manual coordination while giving every level of the organization a clearer and more efficient way to manage employee leave.'],
+      stack: 'Wordpress · GoHighLevel · React', img: 'assets/projects/leavemanagement.png', zoom: true },
+    { title: 'Receipt Capture System', kind: 'Client app', year: '2026',
+      desc: 'A business receipt capture and tracking application designed to digitize the process of submitting and managing employee receipts.',
+      role: 'Frontend developer',
+      detail: 'A fuller paragraph for the popup: what the app is, who it was for, the problem it solved, and the outcome.',
+      highlights: ['A branded internal application where employees sign in with an employee ID and PIN to submit receipts, replacing informal handover of paper receipts.', 'Paper receipts passed around by hand get lost, arrive late, and leave no clear trail of who submitted what.', 'Employee ID and PIN authentication gates access, and each employee submits receipts through a simple, business-oriented interface designed to work on the devices staff already carry.'],
+      stack: 'React Router · React · JWT - BCrypt', img: 'assets/projects/trackerreceipts.png', zoom: true },
+    { title: 'Branded Task Management', kind: 'Client app', year: '2026',
+      desc: 'Centralized web application designed to help organizations assign, track, and monitor employee tasks in one place.',
+      role: 'Full Stack Developer',
+      detail: 'The Employee Task Monitoring System is a centralized web application designed to help organizations assign, track, and monitor employee tasks in one place. It provides managers and administrators with a real-time overview of task progress, priorities, deadlines, workloads, and completion rates, replacing scattered task updates with a structured and transparent workflow. The platform combines task management, employee assignment, reporting, calendar planning, workload monitoring, and administrative controls into a single dashboard. Its goal is to give teams a clear understanding of what needs to be done, who is responsible, what is currently in progress, and what requires attention.',
+      highlights: ['Managing employee tasks through spreadsheets, chat messages, emails, and informal status updates can quickly become difficult as teams grow.', ' designed and developed a centralized task monitoring platform that gives employees and managers a shared source of truth for work activity. The system provides a dashboard with real-time task summaries, including total tasks, active tasks, completed tasks, overdue tasks, and upcoming deadlines. Managers can quickly understand the overall state of their team work without having to manually review individual task records. Tasks can be assigned to specific employees and tracked through clearly defined statuses such as Not Started, In Progress, On Hold, Completed, and Cancelled. Priority levels further help teams identify which work requires immediate attention. The system is structured around a simple workflow: Create Task → Assign Employee → Track Progress → Monitor Deadlines → Complete Task → Review Performance. This creates greater accountability while giving managers the visibility needed to identify delays, workload issues, and productivity trends.', 'The dashboard was designed as the primary command center for managers and administrators. Instead of requiring users to navigate through multiple screens to understand team performance, important information is surfaced immediately through summary cards, visual reports, and task lists. The dashboard provides: Total Tasks — Overall number of tasks within the users scope. Active Tasks — Tasks currently being worked on. Completed Tasks — Tasks successfully completed. Overdue Tasks — Tasks that have passed their deadlines. Due Today — Tasks requiring attention today. Due This Week — Upcoming weekly workload. Due This Month — Broader planning visibility.'],
+      stack: 'React Router · React', img: 'assets/projects/taskmonitort.png', zoom: true }
+  ];
+
+  var shadows = ['#d6694a', '#8fcfb8', '#f2c14e'];
+
+  document.getElementById('grid').innerHTML = projects.map(function (p, i) {
+    var buttons = '';
+    if (p.live) buttons += '<a href="' + p.live + '" target="_blank" rel="noopener" class="proj__live">Live site &#8599;</a>';
+    if (p.repo) buttons += '<a href="' + p.repo + '" target="_blank" rel="noopener" class="proj__repo">Repo</a>';
+    if (p.zoom && p.img) buttons += '<button type="button" class="proj__view" data-zoom="' + i + '">View full &#8853;</button>';
+    var links = buttons ? '<div class="proj__links">' + buttons + '</div>' : '';
+
+    var img = p.img
+      ? '<img src="' + p.img + '" alt="' + p.title + ' screenshot">'
+      : '<div class="proj__ph">Screenshot goes here</div>';
+    var shotClass = (p.zoom && p.img) ? 'proj__shot proj__shot--zoom' : 'proj__shot';
+    var zoomCue = (p.zoom && p.img) ? '<span class="proj__zoom" aria-hidden="true">\u2315</span>' : '';
+    var shotAttrs = (p.zoom && p.img)
+      ? ' data-zoom="' + i + '" role="button" tabindex="0" aria-label="View ' + p.title + ' full size"'
+      : '';
+
+    return '<article class="proj" style="--sh:' + shadows[i % 3] + ';">' +
+      '<div class="' + shotClass + '"' + shotAttrs + '>' + zoomCue + img + '</div>' +
+      '<div class="proj__body">' +
+        '<div class="proj__kind">' + p.kind + ' · ' + p.year + '</div>' +
+        '<h2>' + p.title + '</h2>' +
+        '<p>' + p.desc + '</p>' +
+        '<div class="proj__stack">' + p.stack + '</div>' +
+        links +
+      '</div></article>';
+  }).join('');
+
+  /* Lightbox: only the screenshot-only (restricted) cards open full size */
+  var lb = document.getElementById('proj-lightbox');
+  var lbImg = document.getElementById('proj-lightbox-img');
+  var lbTitle = document.getElementById('proj-lightbox-title');
+  var lbKind = document.getElementById('proj-lightbox-kind');
+  var lbDesc = document.getElementById('proj-lightbox-desc');
+  var lbList = document.getElementById('proj-lightbox-list');
+  var lbStack = document.getElementById('proj-lightbox-stack');
+
+  function openLightbox(idx) {
+    var p = projects[idx];
+    if (!p || !p.img) return;
+    lbImg.src = p.img;
+    lbImg.alt = p.title + ' screenshot';
+    lbTitle.textContent = p.title;
+
+    var meta = p.kind + ' · ' + p.year + (p.role ? ' · ' + p.role : '');
+    lbKind.textContent = meta;
+    lbDesc.textContent = p.detail || p.desc;
+
+    if (p.highlights && p.highlights.length) {
+      lbList.innerHTML = p.highlights.map(function (h) { return '<li>' + h + '</li>'; }).join('');
+      lbList.style.display = '';
+    } else {
+      lbList.innerHTML = '';
+      lbList.style.display = 'none';
+    }
+
+    lbStack.textContent = p.stack;
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-zoom]').forEach(function (el) {
+    el.addEventListener('click', function () { openLightbox(+el.getAttribute('data-zoom')); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(+el.getAttribute('data-zoom')); }
+    });
+  });
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb || e.target.classList.contains('lightbox__close')) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
+  });
+})();
+</script>
+</body>
+</html>

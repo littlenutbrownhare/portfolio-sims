@@ -1,0 +1,125 @@
+/* Mafy Hidalgo portfolio — shared styles
+   Palette: cream #f3ead3, panel #fbf6e9, ink #4a2e22, clay #d6694a, mint #8fcfb8, gold #f2c14e */
+
+@import url('https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+html, body { margin: 0; padding: 0; background: #f3ead3; }
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #4a2e22;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #d6694a; text-decoration: none; }
+a:hover { color: #4a2e22; }
+* { box-sizing: border-box; }
+
+@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.page-bg {
+  min-height: 100vh;
+  background: #f3ead3;
+  background-image: radial-gradient(rgba(74, 46, 34, .06) 1px, transparent 1px);
+  background-size: 5px 5px;
+  overflow-x: hidden;
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 20;
+  background: #f3ead3f2; backdrop-filter: blur(6px);
+  border-bottom: 2px solid #4a2e22;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px 24px; flex-wrap: wrap; padding: 14px 32px;
+}
+.nav__brand { font-family: 'Young Serif', serif; font-size: 22px; color: #4a2e22; }
+.nav__brand span { color: #d6694a; }
+.nav__links { display: flex; gap: 8px; flex-wrap: wrap; font-size: 14px; font-weight: 600; }
+.nav__links a {
+  background: #fbf6e9; color: #4a2e22;
+  border: 2px solid #4a2e22; border-radius: 999px; padding: 6px 16px;
+  transition: background .15s;
+}
+.nav__links a:hover { background: #f2c14e; }
+.nav__links a.is-village { background: #8fcfb8; }
+.nav__links a.is-contact { background: #d6694a; color: #fbf6e9; }
+.nav__links a.is-contact:hover { background: #4a2e22; }
+.nav__links a.is-active { background: #4a2e22; color: #fbf6e9; }
+.nav__links a.is-active:hover { background: #4a2e22; }
+
+/* ---------- Layout ---------- */
+.main { max-width: 1080px; margin: 0 auto; padding: 72px 32px 96px; }
+.eyebrow {
+  font-size: 13px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: #d6694a;
+}
+.page-head { text-align: center; margin-bottom: 56px; position: relative; }
+.page-head h1 {
+  font-family: 'Young Serif', serif;
+  font-size: clamp(32px, 4.6vw, 52px);
+  margin: 6px 0 12px; font-weight: 400;
+}
+.page-head .accent { color: #d6694a; font-style: italic; }
+.page-head p { margin: 0 auto; max-width: 52ch; }
+
+.footer {
+  margin-top: 96px; border-top: 2px solid #4a2e22; padding-top: 20px;
+  display: flex; justify-content: space-between; gap: 12px;
+  flex-wrap: wrap; font-size: 13px; font-weight: 600;
+}
+.footer .italic { font-style: italic; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block; font-family: inherit; font-size: 15px; font-weight: 700;
+  border: 2px solid #4a2e22; border-radius: 999px; padding: 14px 26px;
+  cursor: pointer; text-align: center; transition: background .15s, color .15s, transform .15s;
+}
+.btn--gold { background: #f2c14e; color: #4a2e22; box-shadow: 4px 4px 0 #4a2e22; }
+.btn--gold:hover { background: #4a2e22; color: #fbf6e9; }
+.btn--panel { background: #fbf6e9; color: #4a2e22; }
+.btn--panel:hover { background: #8fcfb8; }
+.btn--clay { background: #d6694a; color: #fbf6e9; box-shadow: 4px 4px 0 #4a2e22; }
+.btn--clay:hover { background: #4a2e22; }
+.btn--ink { background: #4a2e22; color: #fbf6e9; }
+.btn--ink:hover { background: #d6694a; }
+
+/* ---------- Cards ---------- */
+.card {
+  background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 24px;
+  padding: 24px 28px; box-shadow: 6px 6px 0 #d6694a;
+}
+
+/* ---------- Image slot (click to upload, persisted in localStorage) ---------- */
+.slot {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  border: 0; padding: 0; margin: 0; cursor: pointer;
+  background: transparent; overflow: hidden;
+  display: grid; place-items: center;
+  font-family: 'Nunito', sans-serif;
+}
+.slot img { width: 100%; height: 100%; display: block; }
+.slot__ph {
+  color: #4a2e2288; font-size: 13px; font-weight: 600;
+  text-align: center; padding: 8px; pointer-events: none; user-select: none;
+}
+.slot.is-dragover { outline: 3px solid #d6694a; outline-offset: -3px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* ---------- Focus visibility ---------- */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid #f2c14e; outline-offset: 2px;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px) {
+  .main { padding: 48px 20px 72px; }
+  .nav { padding: 12px 18px; }
+}

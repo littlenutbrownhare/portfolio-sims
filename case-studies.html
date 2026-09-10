@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEO Results — Mafy Hidalgo</title>
+<meta name="description" content="Real client SEO and marketing results, shown with permission. €1.31M e-commerce revenue, 100 to 5,000+ sessions, Perth local SEO and more.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .intro p { margin: 0 auto; max-width: 56ch; }
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 24px 0 48px; }
+  .filter { font-family: inherit; font-size: 13px; font-weight: 700; background: #fbf6e9; color: #4a2e22; border: 2px solid #4a2e22; border-radius: 999px; padding: 8px 18px; cursor: pointer; transition: background .15s, color .15s; }
+  .filter:hover { background: #f2c14e; color: #4a2e22; }
+  .filter.is-active { background: #4a2e22; color: #fbf6e9; }
+
+  .cases { display: grid; gap: 40px; }
+  .case { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 28px; padding: 32px; }
+  .case__tags { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .case__kind { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #d6694a; }
+  .case__dur { font-size: 12px; font-weight: 700; background: #f3ead3; border: 1px solid #4a2e22; border-radius: 999px; padding: 2px 10px; }
+  .case__headline { font-family: 'Young Serif', serif; font-size: clamp(30px, 4vw, 48px); line-height: 1.1; margin: 10px 0 4px; }
+  .case__sub { font-weight: 700; }
+  .case p { margin: 16px 0 0; font-size: 15px; }
+  .case__stats { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+  .case__stat { background: #f3ead3; border: 2px solid #4a2e22; border-radius: 14px; padding: 10px 12px; }
+  .case__stat-v { font-family: 'Young Serif', serif; font-size: 20px; line-height: 1.1; }
+  .case__stat-k { font-size: 12px; font-weight: 600; margin-top: 2px; }
+  .case__media { display: grid; gap: 14px; }
+  .case__shot { position: relative; background: #e9dcbb; border: 2px solid #4a2e22; border-radius: 16px; overflow: hidden; }
+
+  .ticker { margin-top: 48px; background: #4a2e22; color: #fbf6e9; border-radius: 999px; padding: 18px 32px; display: flex; gap: 12px 36px; flex-wrap: wrap; justify-content: center; font-size: 14px; font-weight: 700; }
+  .ticker .star { color: #f2c14e; }
+
+  .case__shot--zoom { cursor: zoom-in; }
+  .case__zoom { position: absolute; top: 10px; right: 10px; z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: #4a2e22; color: #fbf6e9; display: grid; place-items: center; font-size: 16px; opacity: 0; transition: opacity .15s; pointer-events: none; }
+  .case__shot--zoom:hover .case__zoom, .case__shot--zoom:focus-visible .case__zoom { opacity: 1; }
+  .case__shot--zoom img { transition: transform .3s ease; }
+  .case__shot--zoom:hover img { transform: scale(1.03); }
+
+  /* Lightbox for result screenshots */
+  .lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 32px; background: rgba(74,46,34,.82); backdrop-filter: blur(3px); cursor: zoom-out; }
+  .lightbox.is-open { display: flex; }
+  .lightbox__inner { position: relative; max-width: 1100px; width: 100%; max-height: 92vh; overflow: auto; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.4); padding: 16px; display: grid; gap: 10px; cursor: default; }
+  .lightbox__img { max-width: 100%; max-height: 80vh; object-fit: contain; border: 1px solid #d9cdb0; border-radius: 6px; margin: 0 auto; display: block; }
+  .lightbox__cap { text-align: center; font-size: 14px; font-weight: 600; }
+  .lightbox__close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border-radius: 50%; background: #d6694a; color: #fbf6e9; border: 2px solid #4a2e22; font-size: 20px; font-weight: 700; cursor: pointer; display: grid; place-items: center; box-shadow: 3px 3px 0 #4a2e22; }
+  .lightbox__close:hover { background: #4a2e22; }
+
+  @media (max-width: 820px) {
+    .case { grid-template-columns: 1fr; }
+    .case__media { order: -1; }
+  }
+</style>
+</head>
+<body>
+<div class="page-bg">
+  <nav data-nav="results"></nav>
+  <main class="main">
+    <div class="page-head intro" style="margin-bottom:24px;">
+      <div class="eyebrow">SEO &amp; marketing results</div>
+      <h1>Numbers that <span class="accent">held up</span></h1>
+      <p>Every result here is real client work, shown with permission. Growth comes only from ethical practice and genuine results.</p>
+    </div>
+
+    <div class="filters" id="filters"></div>
+    <div class="cases" id="cases"></div>
+
+    <div class="ticker">
+      <span>100+ brands</span><span class="star">&#10022;</span>
+      <span>avg. 70% organic lift in 6 months</span><span class="star">&#10022;</span>
+      <span>$500K + &euro;2.3M + &#8369;100M tracked sales</span><span class="star">&#10022;</span>
+      <span>40+ sites shipped</span>
+    </div>
+
+    <footer class="footer"><span>&copy; <span data-year></span> Mafy Hidalgo · Manila</span><a href="testimonials.html">Next: Kind Words &rarr;</a></footer>
+  </main>
+
+  <div class="lightbox" id="case-lightbox" aria-hidden="true">
+    <div class="lightbox__inner" role="dialog" aria-modal="true" aria-label="Result screenshot">
+      <button class="lightbox__close" aria-label="Close">&times;</button>
+      <img class="lightbox__img" id="case-lightbox-img" src="" alt="">
+      <div class="lightbox__cap" id="case-lightbox-cap"></div>
+    </div>
+  </div>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  var data = [
+    { tag: 'SEO', kind: 'E-commerce SEO & Ads', duration: 'Jul 2024 – Jul 2025', headline: '\u20AC1.31M', sub: 'revenue from zero in twelve months', body: 'One keyword map fed both organic content and paid campaigns, so nothing was bid on twice and every landing page pulled double duty.', stats: [{ v: '276,871', k: 'sessions (+20.6%)' }, { v: '6,736', k: 'orders' }, { v: '1.98%', k: 'conversion rate' }, { v: '70K+', k: 'peak monthly sessions' }], shadow: '#f2c14e', img: 'assets/results/p4-12.png' },
+    { tag: 'SEO', kind: 'Logistics · SEO & lead gen', duration: '6 months', headline: '100 \u2192 5,000+', sub: 'monthly organic sessions, 70+ qualified leads', body: 'Technical audit first, then a content roadmap built around commercial logistics terms, then link acquisition. Lead-to-client conversion improved alongside traffic.', stats: [{ v: '4,900%', k: 'traffic increase' }, { v: '70+', k: 'qualified leads' }, { v: 'Page 1', k: 'commercial keywords' }], shadow: '#8fcfb8', img: 'assets/results/p5-13.png' },
+    { tag: 'SEO', kind: 'IlluviData · Data analytics niche', duration: '12 months', headline: '2,500+', sub: 'monthly organic sessions at peak', body: 'A consistent upward curve over the engagement, plus a referral program that grew from a 0.26% share of visits to 5.4% of a much larger total.', stats: [{ v: '77.9K', k: 'total referral visits' }, { v: '5.4%', k: 'referral share' }, { v: '#1', k: 'niche authority' }], shadow: '#d6694a', img: 'assets/results/p2-5.png' },
+    { tag: 'Local SEO', kind: 'Local SEO · Perth Coffee Exchange', duration: 'Perth, Australia', headline: '50+', sub: 'authentic customer reviews generated', body: 'Google Business Profile optimization and a review-generation routine for a local coffee roaster. Top rankings for competitive Perth keywords and a 5.0 rating built on real customers.', stats: [{ v: '5.0 \u2605', k: 'rating, 95 reviews' }, { v: '50+', k: 'reviews during engagement' }, { v: 'Top', k: 'Perth local rankings' }], shadow: '#8fcfb8', img: 'assets/results/p3-7.png' },
+    { tag: 'Local SEO', kind: 'Local SEO · BFS Fleet Service', duration: '6 months', headline: '92K', sub: 'monthly clicks at peak', body: 'The business had limited Google Maps visibility, with an average map rank of 4.7 and only 12 high-ranking grid points. Most locations ranked outside the Google 3-Pack, reducing visibility and potential customer engagement across the target service area.', stats: [{ v: '121', k: 'High Ranking Points' }, { v: '1.8', k: 'Average Map Rank' }, { v: '#1–#3', k: 'Rankings across the grid' }], shadow: '#f2c14e', img: 'assets/results/fleet.png' },
+    { tag: 'Paid ads', kind: 'Meta Ads · Messaging campaign', duration: '2024', headline: '337,190', sub: 'total purchases tracked', body: 'Click-to-message campaign driving conversations and purchases.', stats: [{ v: '14,724', k: 'ad spend' }, { v: '1,586', k: 'messages' }, { v: '9.28', k: 'CPA' }], shadow: '#f2c14e', img: 'assets/results/p6-15.png' }
+  ];
+  var labels = ['All', 'SEO', 'Local SEO', 'Paid ads'];
+  var current = 'All';
+  var filtersEl = document.getElementById('filters');
+  var casesEl = document.getElementById('cases');
+
+  function slug(s) { return s.replace(/[^A-Za-z0-9]/g, ''); }
+
+  function renderFilters() {
+    filtersEl.innerHTML = labels.map(function (l) {
+      return '<button class="filter' + (l === current ? ' is-active' : '') + '" data-label="' + l + '">' + l + '</button>';
+    }).join('');
+    filtersEl.querySelectorAll('.filter').forEach(function (btn) {
+      btn.addEventListener('click', function () { current = btn.getAttribute('data-label'); renderFilters(); renderCases(); });
+    });
+  }
+
+  function renderCases() {
+    var list = data.filter(function (c) { return current === 'All' || c.tag === current; });
+    casesEl.innerHTML = list.map(function (c, i) {
+      var textFirst = i % 2 === 0;
+      var tilt = i % 2 ? -1.5 : 1.5;
+      var stats = c.stats.map(function (st) {
+        return '<div class="case__stat"><div class="case__stat-v">' + st.v + '</div><div class="case__stat-k">' + st.k + '</div></div>';
+      }).join('');
+      var text = '<div>' +
+        '<div class="case__tags"><span class="case__kind">' + c.kind + '</span><span class="case__dur">' + c.duration + '</span></div>' +
+        '<div class="case__headline">' + c.headline + '</div>' +
+        '<div class="case__sub">' + c.sub + '</div>' +
+        '<p>' + c.body + '</p>' +
+        '<div class="case__stats">' + stats + '</div>' +
+      '</div>';
+      var media = '<div class="case__media">' +
+        '<div class="case__shot case__shot--zoom" style="aspect-ratio:16/9;transform:rotate(' + tilt + 'deg);" ' +
+          'role="button" tabindex="0" aria-label="View ' + c.headline + ' screenshot full size" ' +
+          'data-img="' + c.img + '" data-cap="' + c.kind + ' — ' + c.headline + ' ' + c.sub + '">' +
+          '<span class="case__zoom" aria-hidden="true">\u2315</span>' +
+          '<img src="' + c.img + '" alt="' + c.kind + ' — ' + c.headline + ' ' + c.sub + '" style="width:100%;height:100%;object-fit:contain;">' +
+        '</div></div>';
+      return '<article class="case" style="box-shadow:6px 6px 0 ' + c.shadow + ';">' +
+        (textFirst ? text + media : media + text) + '</article>';
+    }).join('');
+
+    // wire up zoom on the freshly rendered shots
+    casesEl.querySelectorAll('.case__shot--zoom').forEach(function (el) {
+      el.addEventListener('click', function () { openLightbox(el); });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(el); }
+      });
+    });
+  }
+
+  var lb = document.getElementById('case-lightbox');
+  var lbImg = document.getElementById('case-lightbox-img');
+  var lbCap = document.getElementById('case-lightbox-cap');
+  function openLightbox(el) {
+    lbImg.src = el.getAttribute('data-img');
+    lbImg.alt = el.getAttribute('data-cap');
+    lbCap.textContent = el.getAttribute('data-cap');
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb || e.target.classList.contains('lightbox__close')) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
+  });
+
+  renderFilters();
+  renderCases();
+})();
+</script>
+</body>
+</html>

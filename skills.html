@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skills — Mafy Hidalgo</title>
+<meta name="description" content="The MERN stack Mafy Hidalgo's projects run on, plus the search and analytics toolkit from five years of agency work.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .page-head__star { position: absolute; right: -20px; top: -30px; width: 120px; height: 120px; background: #f2c14e; clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); opacity: .8; }
+  .groups { display: grid; gap: 28px; }
+  .group { background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 24px; padding: 24px 28px; }
+  .group__head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+  .group__head h2 { font-family: 'Young Serif', serif; font-size: 22px; margin: 0; font-weight: 400; }
+  .group__note { font-size: 13px; color: #d6694a; font-weight: 700; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip { display: inline-flex; align-items: center; gap: 10px; background: #f3ead3; border: 2px solid #4a2e22; border-radius: 999px; padding: 8px 16px 8px 10px; font-size: 14px; font-weight: 600; transition: background .15s, transform .15s; }
+  .chip:hover { background: #f2c14e; transform: translateY(-2px); }
+  .chip__icon { width: 30px; height: 30px; border-radius: 50%; background: #fbf6e9; border: 1px solid #4a2e2233; display: grid; place-items: center; flex: none; }
+  .chip__icon img { width: 16px; height: 16px; display: block; }
+
+  .certs-head { text-align: center; margin-bottom: 36px; }
+  .certs-head h2 { font-family: 'Young Serif', serif; font-size: clamp(26px, 3.4vw, 36px); margin: 6px 0 10px; font-weight: 400; }
+  .certs-head .accent { color: #d6694a; font-style: italic; }
+  .certs-head p { margin: 0 auto; max-width: 48ch; }
+  .certs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 32px 28px; }
+  .cert { margin: 0; position: relative; background: #fbf6e9; padding: 12px 12px 16px; border: 1px solid #d9cdb0; box-shadow: 0 10px 24px rgba(74,46,34,.2); transition: transform .2s; cursor: zoom-in; }
+  .cert:hover { transform: rotate(0deg) translateY(-4px); }
+  .cert__zoom { position: absolute; top: 18px; right: 18px; z-index: 2; width: 30px; height: 30px; border-radius: 50%; background: #4a2e22; color: #fbf6e9; display: grid; place-items: center; font-size: 15px; opacity: 0; transition: opacity .15s; pointer-events: none; }
+  .cert:hover .cert__zoom, .cert:focus-visible .cert__zoom { opacity: 1; }
+  .cert__tape { position: absolute; left: 50%; top: -12px; transform: translateX(-50%) rotate(-2deg); width: 90px; height: 24px; background: rgba(243,234,211,.9); border: 1px solid rgba(74,46,34,.15); }
+  .cert__slot { position: relative; aspect-ratio: 4/3; background: #e9dcbb; overflow: hidden; }
+  .cert figcaption { margin-top: 12px; display: grid; gap: 2px; }
+  .cert__kind { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #d6694a; }
+  .cert__title { font-family: 'Young Serif', serif; font-size: 16px; }
+  .cert__issuer { font-size: 13px; }
+  /* Lightbox for viewing a certificate full size */
+  .lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 32px; background: rgba(74,46,34,.82); backdrop-filter: blur(3px); cursor: zoom-out; }
+  .lightbox.is-open { display: flex; }
+  .lightbox__inner { position: relative; max-width: 1000px; width: 100%; max-height: 90vh; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,.4); padding: 16px; display: grid; gap: 10px; cursor: default; }
+  .lightbox__img { max-width: 100%; max-height: 74vh; object-fit: contain; border-radius: 6px; margin: 0 auto; display: block; }
+  .lightbox__cap { text-align: center; font-family: 'Young Serif', serif; font-size: 16px; }
+  .lightbox__cap small { display: block; font-family: 'Nunito', sans-serif; font-size: 13px; color: #d6694a; margin-top: 2px; }
+  .lightbox__close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; border-radius: 50%; background: #d6694a; color: #fbf6e9; border: 2px solid #4a2e22; font-size: 20px; font-weight: 700; cursor: pointer; display: grid; place-items: center; box-shadow: 3px 3px 0 #4a2e22; }
+  .lightbox__close:hover { background: #4a2e22; }
+</style>
+</head>
+<body>
+<div class="page-bg">
+  <nav data-nav="skills"></nav>
+  <main class="main">
+    <div class="page-head">
+      <div class="page-head__star"></div>
+      <div class="eyebrow">Skills</div>
+      <h1>Tools I reach for, <span class="accent">daily</span></h1>
+      <p>The stack my projects actually run on, plus the search and analytics toolkit from five years of agency work.</p>
+    </div>
+
+    <div class="groups" id="groups"></div>
+
+    <section id="certificates" style="margin-top:96px;">
+      <div class="certs-head">
+        <div class="eyebrow">Certificates</div>
+        <h2>Paper that <span class="accent">backs it up</span></h2>
+        <p>Training and credentials, with the paper to back them up.</p>
+      </div>
+      <div class="certs" id="certs"></div>
+    </section>
+
+    <footer class="footer"><span>&copy; <span data-year></span> Mafy Hidalgo · Manila</span><a href="projects.html">Next: Projects &rarr;</a></footer>
+  </main>
+
+  <div class="lightbox" id="cert-lightbox" aria-hidden="true">
+    <div class="lightbox__inner" role="dialog" aria-modal="true" aria-label="Certificate">
+      <button class="lightbox__close" aria-label="Close">&times;</button>
+      <img class="lightbox__img" id="cert-lightbox-img" src="" alt="">
+      <div class="lightbox__cap" id="cert-lightbox-cap"></div>
+    </div>
+  </div>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  function ic(slug, color) { return 'https://cdn.simpleicons.org/' + slug + (color ? '/' + color : ''); }
+  function gen(label) {
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#4a2e22"/><text x="12" y="16.5" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle" fill="#fbf6e9">' + label + '</text></svg>');
+  }
+
+  var groups = [
+    { name: 'Front end', note: 'what users see', items: [
+      { name: 'HTML', icon: ic('html5') }, { name: 'CSS', icon: ic('css') }, { name: 'JavaScript', icon: ic('javascript') }, { name: 'React', icon: ic('react') }, { name: 'Redux Toolkit', icon: ic('redux') }, { name: 'React Router', icon: ic('reactrouter') }, { name: 'Vite', icon: ic('vite') }, { name: 'Netlify', icon: ic('netlify') }, { name: 'Responsive design', icon: gen('RWD') } ] },
+    { name: 'Back end', note: 'what the server decides', items: [
+      { name: 'Node.js', icon: ic('nodedotjs') }, { name: 'Express', icon: ic('express', '4a2e22') }, { name: 'REST APIs', icon: gen('API') }, { name: 'JWT', icon: ic('jsonwebtokens', '4a2e22') }, { name: 'bcrypt', icon: gen('\uD83D\uDD12') }, { name: 'helmet · cors · dotenv', icon: ic('npm') }, { name: 'Render', icon: ic('render', '4a2e22') } ] },
+    { name: 'Databases', note: 'where the truth lives', items: [
+      { name: 'MongoDB Atlas', icon: ic('mongodb') }, { name: 'Mongoose', icon: ic('mongoose') }, { name: 'Aggregation pipelines', icon: gen('\u03A3') }, { name: 'Local Storage', icon: gen('LS') } ] },
+    { name: 'Testing & tools', note: 'read logs before guessing', items: [
+      { name: 'Cypress', icon: ic('cypress', '4a2e22') }, { name: 'Git', icon: ic('git') }, { name: 'GitHub', icon: ic('github', '4a2e22') }, { name: 'GitLab', icon: ic('gitlab') }, { name: 'npm', icon: ic('npm') }, { name: 'Postman', icon: ic('postman') }, { name: 'Jira', icon: ic('jira') }, { name: 'Trello', icon: ic('trello') }, { name: 'CI/CD', icon: gen('CI') } ] },
+    { name: 'CMS & platforms', note: 'client sites, fast', items: [
+      { name: 'WordPress', icon: ic('wordpress') }, { name: 'Webflow', icon: ic('webflow') }, { name: 'Shopify', icon: ic('shopify') }, { name: 'Payload CMS', icon: ic('payloadcms', '4a2e22') }, { name: 'GoHighLevel', icon: gen('GHL') } ] },
+    { name: 'Automations', note: 'let the robots do the boring part', items: [
+      { name: 'Make', icon: ic('make') }, { name: 'Zapier', icon: ic('zapier') }, { name: 'n8n', icon: ic('n8n') }, { name: 'GHL workflows', icon: gen('GHL') }, { name: 'Google Apps Script', icon: ic('googleappsscript') }, { name: 'API integrations', icon: gen('API') } ] },
+    { name: 'SEO & analytics', note: 'five years, 100+ brands', items: [
+      { name: 'Technical SEO', icon: gen('SEO') }, { name: 'Keyword research', icon: gen('KW') }, { name: 'Google Analytics 4', icon: ic('googleanalytics') }, { name: 'Search Console', icon: ic('googlesearchconsole') }, { name: 'Google Business Profile', icon: ic('google') }, { name: 'Semrush', icon: ic('semrush') }, { name: 'Meta Ads', icon: ic('meta') }, { name: 'R', icon: ic('r') }, { name: 'Core Web Vitals', icon: ic('lighthouse') }, { name: 'Link acquisition', icon: gen('\u2197') } ] }
+  ];
+  var shadows = ['#d6694a', '#8fcfb8', '#f2c14e'];
+
+  document.getElementById('groups').innerHTML = groups.map(function (g, i) {
+    var chips = g.items.map(function (s) {
+      return '<span class="chip"><span class="chip__icon"><img src="' + s.icon + '" alt="" loading="lazy"></span>' + s.name + '</span>';
+    }).join('');
+    return '<section class="group" style="box-shadow:6px 6px 0 ' + shadows[i % 3] + ';">' +
+      '<div class="group__head"><h2>' + g.name + '</h2><span class="group__note">' + g.note + '</span></div>' +
+      '<div class="chips">' + chips + '</div></section>';
+  }).join('');
+
+  var certs = [
+    { kind: 'Web development', title: 'Full Stack Web Development', issuer: 'Uplift Code Camp · 2026', img: 'assets/certs/uplift.png' },
+    { kind: 'Web Design & Development ', title: 'Web Design & Development in Context with SEO', issuer: 'iBuild.ph · 2023', img: 'assets/certs/webdesign.png' },
+    { kind: 'SEO', title: 'Search Engine Optimization', issuer: 'ProVA · 2022', img: 'assets/certs/seo.png' },
+    { kind: 'Automation & CRM', title: 'GoHighLevel Expert', issuer: 'ProVa · 2025', img: 'assets/certs/GHL.png' },
+    { kind: 'Ads', title: 'FB Ads Management', issuer: 'ProVA · 2022', img: 'assets/certs/fbads.png' },
+    { kind: 'Other', title: 'The SEO Movement', issuer: 'World Of Search· 2023', img: 'assets/certs/woscon2023.jpg' }
+    // ...add more entries here; each needs kind, title, issuer, img
+  ];
+  var tilts = [-1.5, 1, -0.5, 1.5, -1, 0.5];
+  document.getElementById('certs').innerHTML = certs.map(function (c, i) {
+    return '<figure class="cert" tabindex="0" role="button" aria-label="View ' + c.title + ' full size" ' +
+      'data-img="' + c.img + '" data-title="' + c.title + '" data-issuer="' + c.issuer + '" ' +
+      'style="transform:rotate(' + tilts[i % tilts.length] + 'deg);">' +
+      '<div class="cert__zoom" aria-hidden="true">\u2315</div>' +
+      '<div class="cert__tape"></div>' +
+      '<div class="cert__slot"><img src="' + c.img + '" alt="' + c.title + ' — ' + c.issuer + '" style="width:100%;height:100%;object-fit:cover;"></div>' +
+      '<figcaption><span class="cert__kind">' + c.kind + '</span><span class="cert__title">' + c.title + '</span><span class="cert__issuer">' + c.issuer + '</span></figcaption>' +
+      '</figure>';
+  }).join('');
+
+  /* Lightbox: click or press Enter/Space on a cert to view it full size */
+  var lb = document.getElementById('cert-lightbox');
+  var lbImg = document.getElementById('cert-lightbox-img');
+  var lbCap = document.getElementById('cert-lightbox-cap');
+
+  function openLightbox(fig) {
+    lbImg.src = fig.getAttribute('data-img');
+    lbImg.alt = fig.getAttribute('data-title');
+    lbCap.innerHTML = fig.getAttribute('data-title') + '<small>' + fig.getAttribute('data-issuer') + '</small>';
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.cert').forEach(function (fig) {
+    fig.addEventListener('click', function () { openLightbox(fig); });
+    fig.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(fig); }
+    });
+  });
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb || e.target.classList.contains('lightbox__close')) closeLightbox();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) closeLightbox();
+  });
+})();
+</script>
+</body>
+</html>

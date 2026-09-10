@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kind Words — Mafy Hidalgo</title>
+<meta name="description" content="What clients and teammates say about working with Mafy Hidalgo.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .featured { margin-bottom: 64px; }
+  .featured__frame { position: relative; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 24px; padding: 16px; box-shadow: 8px 8px 0 #d6694a; max-width: 860px; margin: 0 auto; }
+  .featured__video { position: relative; width: 100%; aspect-ratio: 16/9; background: #e9dcbb; border: 2px solid #4a2e22; border-radius: 14px; overflow: hidden; }
+  .featured__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .featured__cap { text-align: center; margin-top: 14px; font-size: 14px; }
+  .featured__cap b { font-family: 'Young Serif', serif; font-weight: 400; font-size: 16px; }
+  .featured__cap span { color: #d6694a; font-style: italic; }
+
+  .section-label { text-align: center; margin: 0 0 28px; }
+  .section-label .eyebrow { display: block; }
+  .section-label h2 { font-family: 'Young Serif', serif; font-size: clamp(24px, 3.2vw, 32px); margin: 6px 0 0; font-weight: 400; }
+
+  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+  .quote { margin: 0; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 28px 28px 28px 6px; padding: 28px; display: grid; gap: 18px; }
+  .quote__mark { font-family: 'Young Serif', serif; font-size: 40px; line-height: .6; color: #d6694a; }
+  .quote blockquote { margin: 0; font-size: 16px; }
+  .quote figcaption { display: flex; gap: 14px; align-items: center; }
+  .quote__avatar { width: 52px; height: 52px; border-radius: 50%; border: 2px solid #4a2e22; overflow: hidden; background: #e9dcbb; flex: none; position: relative; }
+  .quote__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .quote__who { font-size: 14px; }
+  .quote__role { color: #d6694a; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="page-bg">
+  <nav data-nav="words"></nav>
+  <main class="main">
+    <div class="page-head">
+      <div class="eyebrow">Kind words</div>
+      <h1>What clients and teammates <span class="accent">say</span></h1>
+      <p>A word from the people I've built and ranked for.</p>
+    </div>
+
+    <section class="featured">
+      <div class="featured__frame">
+        <div class="featured__video">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/rM5q0tglcJI"
+            title="Client testimonial for Mafy Hidalgo"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+        <div class="featured__cap"><b>Haley</b> · <span>Real Estate Agent, California</span></div>
+      </div>
+    </section>
+
+    <div class="section-label">
+      <div class="eyebrow">In their words</div>
+      <h2>More kind words</h2>
+    </div>
+
+    <div class="quotes" id="quotes"></div>
+
+    <footer class="footer"><span>&copy; <span data-year></span> Mafy Hidalgo · Manila</span><a href="contact.html">Next: Contact &rarr;</a></footer>
+  </main>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  /* Three text testimonials. Fill in real quotes, names, roles, and avatar images.
+     avatar: path in assets/testimonials/ (a headshot or company logo). Leave '' for a blank circle. */
+  var quotes = [
+    { text: 'Working with Mafy was one of the best decisions we made for our business. She didn\'t just promise better rankings, she actually delivered. Our Google Maps visibility improved dramatically, and we started showing up in the top positions across our service area. The communication was excellent, and they always explained what they were doing in a way we could understand..', who: 'Anna', role: 'Marketing Head, BFS Fleet Service', avatar: 'assets/testimonials/anna.webp' },
+    { text: 'Mafy helped us improve both our website and our online visibility. She understood our business, built a website that actually represented our brand, and put a real SEO strategy behind it. What impressed us most was her attention to detail and willingness to go the extra mile. We finally feel like our website is working for our business instead of just sitting online.', who: 'Elyas', role: 'Owner · Poopy', avatar: 'assets/testimonials/E;yas.jpeg' },
+    { text: 'Mafy has been amazing to work with. She brought together SEO, web development, and local search in a way that produced real results. We saw our rankings improve, our online presence become much stronger, and more customers finding us through Google. She are professional, responsive, creative, and genuinely care about the success of her clients. I would absolutely recommend Mafy to any business looking to grow online.', who: 'Dan', role: 'Managing Partner, Advanced Local', avatar: 'assets/testimonials/Dan.jpeg' }
+  ];
+  var shadows = ['#d6694a', '#8fcfb8', '#f2c14e'];
+  var tilts = [-1, 0.8, -0.5];
+
+  document.getElementById('quotes').innerHTML = quotes.map(function (q, i) {
+    var avatar = q.avatar
+      ? '<img src="' + q.avatar + '" alt="' + q.who + '">'
+      : '';
+    return '<figure class="quote" style="box-shadow:6px 6px 0 ' + shadows[i % 3] + ';transform:rotate(' + tilts[i] + 'deg);">' +
+      '<div class="quote__mark">\u201C</div>' +
+      '<blockquote>' + q.text + '</blockquote>' +
+      '<figcaption>' +
+        '<div class="quote__avatar">' + avatar + '</div>' +
+        '<div class="quote__who"><b>' + q.who + '</b><br><span class="quote__role">' + q.role + '</span></div>' +
+      '</figcaption></figure>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

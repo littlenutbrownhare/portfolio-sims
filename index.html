@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mafy Hidalgo — Full stack developer with an SEO brain</title>
+<meta name="description" content="Mafy Hidalgo builds React and Node applications end to end, then applies five years of SEO for 100+ brands so the sites she ships get found and get used. Manila, Philippines.">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: center; position: relative; }
+  .hero__star { position: absolute; left: -80px; top: -40px; width: 220px; height: 220px; background: #8fcfb8; clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); opacity: .7; pointer-events: none; }
+  .hero__badge { display: inline-block; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 999px; padding: 6px 16px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .hero__bubble { position: relative; margin-top: 22px; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 40px 40px 40px 8px; padding: 36px 40px; box-shadow: 6px 6px 0 #4a2e22; }
+  .hero__bubble h1 { font-family: 'Young Serif', serif; font-size: clamp(34px, 4.6vw, 56px); line-height: 1.08; margin: 0; font-weight: 400; }
+  .hero__u { color: #d6694a; position: relative; white-space: nowrap; }
+  .hero__u span { position: absolute; left: -6px; right: -6px; bottom: -4px; height: 14px; border: 3px solid #d6694a; border-radius: 50%; border-top-color: transparent; transform: rotate(-2deg); }
+  .hero__bubble p { margin: 20px 0 0; font-size: 17px; max-width: 46ch; }
+  .hero__typed { margin-top: 28px; font-family: 'Young Serif', serif; font-size: 20px; color: #d6694a; min-height: 30px; }
+  .hero__cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+  .hero__photo-wrap { position: relative; justify-self: center; width: min(100%, 340px); }
+  .hero__spin { position: absolute; right: -60px; top: -50px; width: 160px; height: 160px; background: #d6694a; clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); opacity: .85; animation: spin 40s linear infinite; pointer-events: none; }
+  .hero__frame { position: relative; background: #fbf6e9; padding: 14px 14px 48px; border: 1px solid #d9cdb0; box-shadow: 0 12px 30px rgba(74,46,34,.25); transform: rotate(-3deg); }
+  .hero__tape { position: absolute; left: 50%; top: -14px; transform: translateX(-50%) rotate(2deg); width: 110px; height: 28px; background: rgba(243,234,211,.85); border: 1px solid rgba(74,46,34,.15); }
+  .hero__slot { position: relative; width: 100%; aspect-ratio: 1; background: #e9dcbb; overflow: hidden; }
+  .hero__caption { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font-family: 'Young Serif', serif; font-size: 18px; }
+
+  .audit { margin-top: 110px; position: relative; }
+  .audit__head { text-align: center; margin-bottom: 36px; }
+  .audit__head h2 { font-family: 'Young Serif', serif; font-size: clamp(30px, 4vw, 44px); margin: 6px 0 10px; font-weight: 400; }
+  .audit__head p { margin: 0 auto; max-width: 48ch; }
+  .audit__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 32px; align-items: start; }
+  .audit__form { background: #8fcfb8; border: 2px solid #4a2e22; border-radius: 24px; padding: 28px; box-shadow: 6px 6px 0 #4a2e22; display: grid; gap: 14px; }
+  .audit__form label { font-weight: 700; font-size: 14px; }
+  .audit__form input { font-family: inherit; font-size: 17px; padding: 12px 16px; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 12px; color: #4a2e22; outline: none; width: 100%; }
+  .audit__form input:focus { box-shadow: 0 0 0 3px #f2c14e; }
+  .audit__form .note { margin: 6px 0 0; font-size: 13px; }
+  .audit__ticket { position: relative; background: #fbf6e9; border: 2px solid #4a2e22; padding: 28px 30px 34px; min-height: 340px; font-size: 15px; box-shadow: 6px 6px 0 #4a2e22; }
+  .audit__perf { position: absolute; left: 0; right: 0; bottom: -2px; height: 12px; background: radial-gradient(circle at 6px -2px, transparent 6px, #4a2e22 6.5px, #4a2e22 8px, transparent 8.5px) 0 0/16px 12px repeat-x; }
+  .audit__ticket-head { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border-bottom: 2px dashed #4a2e22; padding-bottom: 10px; margin-bottom: 16px; }
+  .audit-line { display: flex; gap: 12px; line-height: 2; border-bottom: 1px dotted #d9cdb0; }
+  .audit-mark { color: #d6694a; min-width: 20px; font-weight: 700; }
+  .audit-cursor { display: inline-block; width: 9px; height: 16px; background: #4a2e22; animation: blink 1s steps(1) infinite; margin-top: 8px; }
+  .audit__result { margin-top: 20px; display: none; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .audit__grade { font-size: 14px; font-weight: 700; }
+  .audit__badge { width: 110px; height: 110px; background: #f2c14e; clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); display: grid; place-items: center; text-align: center; font-family: 'Young Serif', serif; line-height: 1; }
+  .audit__badge > span { font-size: 30px; }
+  .audit__badge small { font-size: 12px; display: block; font-family: 'Nunito', sans-serif; font-weight: 700; }
+
+  .trusted { margin-top: 110px; }
+  .trusted__head { text-align: center; margin-bottom: 32px; }
+  .trusted__head h2 { font-family: 'Young Serif', serif; font-size: clamp(28px, 3.6vw, 40px); margin: 6px 0 10px; font-weight: 400; }
+  .trusted__head .accent { color: #d6694a; font-style: italic; }
+  .trusted__head p { margin: 0 auto; max-width: 48ch; }
+  .marquee-wrap { background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 28px; padding: 24px 0; box-shadow: 6px 6px 0 #8fcfb8; overflow: hidden; position: relative; }
+  .marquee-fade-l, .marquee-fade-r { position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+  .marquee-fade-l { left: 0; background: linear-gradient(90deg, #fbf6e9, transparent); }
+  .marquee-fade-r { right: 0; background: linear-gradient(270deg, #fbf6e9, transparent); }
+  .marquee { display: flex; gap: 20px; width: max-content; animation: marquee 40s linear infinite; }
+  .marquee:hover { animation-play-state: paused; }
+  .logo-slot { position: relative; width: 170px; height: 96px; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 14px; overflow: hidden; flex: none; }
+  .logo-slot img { width: 100%; height: 100%; object-fit: contain; padding: 14px; }
+
+  .stats { margin-top: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .stat { display: block; color: #4a2e22; background: #fbf6e9; border: 2px solid #4a2e22; border-radius: 20px; padding: 24px; }
+  .stat:hover { background: #f2c14e; color: #4a2e22; }
+  .stat__n { font-family: 'Young Serif', serif; font-size: 36px; line-height: 1; }
+  .stat__l { font-size: 14px; margin-top: 8px; }
+
+  @media (max-width: 820px) {
+    .hero, .audit__grid { grid-template-columns: 1fr; }
+    .hero__star, .hero__spin { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page-bg">
+  <nav data-nav="home"></nav>
+  <main class="main">
+    <header class="hero">
+      <div class="hero__star"></div>
+      <div style="position:relative;">
+        <div class="hero__badge">Manila, Philippines · Est. 2020</div>
+        <div class="hero__bubble">
+          <h1>Your full stack developer with an <span class="hero__u">SEO brain<span></span></span></h1>
+          <p>I ran SEO for 100+ brands for five years. Then I learned to build the sites myself. React and Node end to end, then I make sure what ships actually gets found.</p>
+        </div>
+        <div class="hero__typed" id="typed">|</div>
+        <div class="hero__cta">
+          <a href="projects.html" class="btn btn--gold">See my work</a>
+          <a href="Mafy-Hidalgo-Resume.pdf" download class="btn btn--panel">Download resume &darr;</a>
+        </div>
+      </div>
+      <div class="hero__photo-wrap">
+        <div class="hero__spin"></div>
+        <div class="hero__frame">
+          <div class="hero__tape"></div>
+          <div class="hero__slot">
+  <img src="assets/Mafy.png" alt="Mafy Hidalgo" style="width:100%;height:100%;object-fit:cover;">
+</div>
+          <div class="hero__caption">hi, I'm Mafy &#9786;</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="audit" id="audit">
+      <div class="audit__head">
+        <div class="eyebrow">Try it</div>
+        <h2>The audit counter</h2>
+        <p>Type a URL and get a quick SEO ticket. Demo numbers, real checklist.</p>
+      </div>
+      <div class="audit__grid">
+        <form class="audit__form" id="audit-form">
+          <label for="audit-url">Website to check</label>
+          <input id="audit-url" placeholder="yourbusiness.com" autocomplete="off">
+          <button type="submit" class="btn btn--ink" id="audit-btn" style="justify-self:start;">Run the audit</button>
+          <p class="note">Checks title and meta, headings, alt text, Core Web Vitals, indexability and links. Want the real thing? <a href="contact.html" style="font-weight:700;text-decoration:underline;">Ask me.</a></p>
+        </form>
+        <div class="audit__ticket">
+          <div class="audit__perf"></div>
+          <div class="audit__ticket-head"><span>Order · SEO audit</span><span id="audit-date"></span></div>
+          <p id="audit-idle" style="margin:0;opacity:.7;">Waiting for a URL. Kettle's on.</p>
+          <div id="audit-lines"></div>
+          <div class="audit__result" id="audit-result">
+            <div class="audit__grade" id="audit-grade"></div>
+            <div class="audit__badge" id="audit-score"><span>0<small>/100</small></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trusted" id="trusted">
+      <div class="trusted__head">
+        <div class="eyebrow">Trusted by</div>
+        <h2>Brands that let me <span class="accent">touch the site</span></h2>
+      </div>
+      <div class="marquee-wrap">
+        <div class="marquee-fade-l"></div>
+        <div class="marquee-fade-r"></div>
+        <div class="marquee" id="logo-marquee"></div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <a href="case-studies.html" class="stat"><div class="stat__n">100+</div><div class="stat__l">brands ranked</div></a>
+      <a href="case-studies.html" class="stat"><div class="stat__n">&euro;1.31M</div><div class="stat__l">e-commerce revenue in 12 months</div></a>
+      <a href="case-studies.html" class="stat"><div class="stat__n">70%</div><div class="stat__l">average organic lift in 6 months</div></a>
+      <a href="about.html" class="stat"><div class="stat__n">40+</div><div class="stat__l">sites shipped as DevOps lead</div></a>
+    </section>
+
+    <footer class="footer"><span>&copy; <span data-year></span> Mafy Hidalgo · Manila</span><span class="italic">For those who dream without borders</span></footer>
+  </main>
+</div>
+
+<script src="assets/site.js"></script>
+<script src="assets/audit.js"></script>
+<script>
+/* Hero typing tagline */
+(function () {
+  var el = document.getElementById('typed');
+  if (!el) return;
+  var lines = ['React + Node by day. Rankings by night.', 'Data model \u2192 deployment \u2192 page one.', 'For those who dream without borders.'];
+  var idx = 0, typed = '', tick, pause;
+  function run() {
+    var full = lines[idx % lines.length];
+    tick = setInterval(function () {
+      if (typed.length < full.length) { typed = full.slice(0, typed.length + 1); el.textContent = typed + '|'; }
+      else { clearInterval(tick); pause = setTimeout(function () { typed = ''; idx++; run(); }, 2600); }
+    }, 55);
+  }
+  run();
+})();
+
+/* Logo marquee: real client logos, drawn twice for a seamless loop.
+   Add or remove entries below. Put the files in assets/logos/.
+   Use SVG or transparent PNG; avoid JPG (no transparency = white box). */
+(function () {
+  var wrap = document.getElementById('logo-marquee');
+  if (!wrap) return;
+
+  var logos = [
+    { src: 'assets/logos/Herbenna.png',   alt: 'Herbenna' },
+    { src: 'assets/logos/2.png',   alt: '-' },
+    { src: 'assets/logos/3.png',   alt: '-' },
+    { src: 'assets/logos/4.png',   alt: '-' },
+    { src: 'assets/logos/5.png',   alt: '-' },
+    { src: 'assets/logos/6.png',   alt: '-' },
+    { src: 'assets/logos/7.png',   alt: '-' },
+    { src: 'assets/logos/11.png',   alt: '-' },
+    { src: 'assets/logos/12.png',   alt: '-' },
+    { src: 'assets/logos/triviva.png',   alt: 'Triviva Health' },
+    { src: 'assets/logos/hnc-logo.png',   alt: 'Herbs and Nature' },
+    { src: 'assets/logos/Trevenodd.png',   alt: 'Trevenodd Corporation' },
+    { src: 'assets/logos/perthcoffee.png', alt: 'Perth Coffee Exchange' }
+  ];
+
+  function frame(logo, hideFromReaders) {
+    return '<div class="logo-slot">' +
+      '<img src="' + logo.src + '" alt="' + (hideFromReaders ? '' : logo.alt) + '"' +
+      (hideFromReaders ? ' aria-hidden="true"' : '') + '>' +
+      '</div>';
+  }
+
+  // First copy is the real one; second copy is decorative (hidden from screen readers).
+  var first = logos.map(function (l) { return frame(l, false); }).join('');
+  var second = logos.map(function (l) { return frame(l, true); }).join('');
+  wrap.innerHTML = first + second;
+})();
+</script>
+</body>
+</html>
