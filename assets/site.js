@@ -84,8 +84,8 @@
 
   /* ---------- Shared nav ---------- */
   var NAV_LINKS = [
-    { href: 'village.html', label: '\uD83D\uDC07 Village map', cls: 'is-village' },
-    { href: 'index.html', label: 'Home', key: 'home' },
+    { href: 'index.html', label: '\uD83D\uDC07 Village map', cls: 'is-village' },
+    { href: 'home.html', label: 'Home', key: 'home' },
     { href: 'about.html', label: 'About', key: 'about' },
     { href: 'skills.html', label: 'Skills', key: 'skills' },
     { href: 'projects.html', label: 'Projects', key: 'projects' },
@@ -104,7 +104,7 @@
       return '<a href="' + l.href + '" class="' + cls.trim() + '">' + l.label + '</a>';
     }).join('');
     mount.innerHTML =
-      '<a href="index.html" class="nav__brand"><span>mafy</span> hidalgo</a>' +
+      '<a href="home.html" class="nav__brand"><span>mafy</span> hidalgo</a>' +
       '<div class="nav__links">' + links + '</div>';
     mount.className = 'nav';
   }
