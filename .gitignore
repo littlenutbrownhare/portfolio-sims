@@ -2,3 +2,4 @@
 .vscode/
 .netlify/
 .env
+.DS_Store
